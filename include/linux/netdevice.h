@@ -1900,6 +1900,9 @@ struct napi_gro_cb {
 	/* Used in udp_gro_receive */
 	u8	udp_mark:1;
 
+	/* Used in tunnel GRO receive */
+	u8	encap_mark:1;
+
 	/* GRO checksum is valid */
 	u8	csum_valid:1;
 

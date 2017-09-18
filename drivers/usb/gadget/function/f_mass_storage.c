@@ -682,7 +682,12 @@ static int sleep_thread(struct fsg_common *common, bool can_freeze)
 	spin_lock_irq(&common->lock);
 	common->thread_wakeup_needed = 0;
 	spin_unlock_irq(&common->lock);
-	smp_rmb();	/* ensure the latest bh->state is visible */
+
+	/*
+	 * Ensure the writing of thread_wakeup_needed
+	 * and the reading of bh->state are completed
+	 */
+	smp_mb();
 	return rc;
 }
 
